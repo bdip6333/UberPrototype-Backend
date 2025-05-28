@@ -32,11 +32,4 @@ public class BookingController {
         return bookingServices.readBooking(bookingID);
     }
 
-    @GetMapping("/total-number")
-    public List<CustomerResponseDTO> AgratoDelhi()
-    {
-        return bookingServices.AgratoDelhi();
-    }
-
-
 }

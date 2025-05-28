@@ -151,23 +151,5 @@ public class BookingServices {
 
     }
 
-    public List<CustomerResponseDTO> AgratoDelhi()
-    {
-        List<Customer> customers=customerRepository.fetchcustomer();
-
-        List<CustomerResponseDTO> list=new ArrayList<>();
-
-        for(Customer customer:customers)
-        {
-            CustomerResponseDTO ct=CustomerTransformer.EntityToDTO(customer);
-            list.add(ct);
-        }
-        return list;
-    }
-
-
-//    TOTAL NUMBER OF BOOKINGS FROM AGRA TO DELHI
-
-
 }
 
