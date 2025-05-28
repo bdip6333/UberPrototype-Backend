@@ -6,7 +6,7 @@ import com.example.uber_backend.Entity.Driver;
 
 public class DriverTransformer {
 
-    public static Driver driverRequestToDriver(DriverRequestDTO driverRequestDTO)
+    public static Driver DTOtoEntity(DriverRequestDTO driverRequestDTO)
     {
         return Driver.builder()
             .name(driverRequestDTO.getName())
@@ -14,7 +14,7 @@ public class DriverTransformer {
                 .emailId((driverRequestDTO.getEmailId()))
             .build();
     }
-    public static DriverResponseDTO driverToDriverResponse(Driver driver)
+    public static DriverResponseDTO EntityToDTO(Driver driver)
     {
         return DriverResponseDTO.builder()
             .name(driver.getName())

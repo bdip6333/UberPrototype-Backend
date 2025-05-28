@@ -14,25 +14,25 @@ public class CustomerController {
     @Autowired
     CustomerServices customerServices;
 
-    //Create
-    @PostMapping("/create")
-    public CustomerResponseDTO postCustomer(@RequestBody CustomerRequestDTO customerRequestDTO)
+    //Create/signup
+    @PostMapping("/create/signup")
+    public CustomerResponseDTO createCustomer(@RequestBody CustomerRequestDTO customerRequestDTO)
     {
 
-        return customerServices.postCustomer(customerRequestDTO);
+        return customerServices.createCustomer(customerRequestDTO);
     }
 
     //Update
     @PutMapping("/update/{id}")
-    public CustomerResponseDTO putCustomer(@PathVariable("id") int customerId, @RequestBody CustomerRequestDTO customerRequestDTO) {
-        return customerServices.putCustomer(customerId, customerRequestDTO);
+    public CustomerResponseDTO updateCustomer(@PathVariable("id") int customerId, @RequestBody CustomerRequestDTO customerRequestDTO) {
+        return customerServices.updateCustomer(customerId, customerRequestDTO);
     }
 
     //Read
     @GetMapping("read/{id}")
-    public CustomerResponseDTO getCustomer(@PathVariable("id") int customerId)
+    public CustomerResponseDTO readCustomer(@PathVariable("id") int customerId)
     {
-        return customerServices.getCustomer(customerId);
+        return customerServices.readCustomer(customerId);
     }
 
     //Delete
@@ -41,6 +41,5 @@ public class CustomerController {
     {
         return customerServices.deleteCustomer(customerId);
     }
-
 
 }

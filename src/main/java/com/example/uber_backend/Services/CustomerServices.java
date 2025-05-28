@@ -17,19 +17,19 @@ public class CustomerServices {
     @Autowired
     private CustomerRepository customerRepository;
 
-    public CustomerResponseDTO postCustomer(CustomerRequestDTO customerRequestDTO) {
-        Customer customer= CustomerTransformer.customerRequestToCustomer(customerRequestDTO);
+    public CustomerResponseDTO createCustomer(CustomerRequestDTO customerRequestDTO) {
+        Customer customer= CustomerTransformer.DTOtoEntity(customerRequestDTO);
         Customer savedCustomer = customerRepository.save(customer);
-        return CustomerTransformer.customerToCustomerResponse(savedCustomer);
+        return CustomerTransformer.EntityToDTO(savedCustomer);
     }
 
-    public CustomerResponseDTO putCustomer(int customerId, CustomerRequestDTO customerRequestDTO)
+    public CustomerResponseDTO updateCustomer(int customerId, CustomerRequestDTO customerRequestDTO)
     {
         Optional<Customer> optionalCustomer=customerRepository.findById(customerId);
         if(optionalCustomer.isEmpty()) throw new CustomerNotFoundException("Invalid Customer Id");
 
         // Create updated customer from request
-        Customer updatedCustomer = CustomerTransformer.customerRequestToCustomer(customerRequestDTO);
+        Customer updatedCustomer = CustomerTransformer.DTOtoEntity(customerRequestDTO);
 
         // Maintain the same ID
         updatedCustomer.setCustomerId(customerId);
@@ -39,15 +39,15 @@ public class CustomerServices {
 
         // Save and return
         Customer savedCustomer = customerRepository.save(updatedCustomer);
-        return CustomerTransformer.customerToCustomerResponse(savedCustomer);
+        return CustomerTransformer.EntityToDTO(savedCustomer);
     }
 
 
-    public CustomerResponseDTO getCustomer(int customerId) {
+    public CustomerResponseDTO readCustomer(int customerId) {
         Optional<Customer> optionalCustomer=customerRepository.findById(customerId);
         if(optionalCustomer.isEmpty()) throw new CustomerNotFoundException("Invalid Customer Id");
         Customer savedCustomer=optionalCustomer.get();
-        return CustomerTransformer.customerToCustomerResponse(savedCustomer);
+        return CustomerTransformer.EntityToDTO(savedCustomer);
     }
 
     public CustomerResponseDTO deleteCustomer(int customerId)
@@ -58,7 +58,7 @@ public class CustomerServices {
         Customer customer = optionalCustomer.get();
 
         // Save customer data before deletion to return in response
-        CustomerResponseDTO responseDTO = CustomerTransformer.customerToCustomerResponse(customer);
+        CustomerResponseDTO responseDTO = CustomerTransformer.EntityToDTO(customer);
 
         // Delete the customer
         customerRepository.delete(customer);

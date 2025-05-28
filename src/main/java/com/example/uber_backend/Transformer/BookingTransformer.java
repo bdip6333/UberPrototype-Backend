@@ -9,7 +9,7 @@ import com.example.uber_backend.Entity.Driver;
 import com.example.uber_backend.Enums.TripStatus;
 
 public class BookingTransformer {
-    public static Booking bookingRequestToBooking(BookingRequestDTO bookingRequestDTO, double perKmRate)
+    public static Booking DTOtoEntity(BookingRequestDTO bookingRequestDTO, double perKmRate)
     {
         return Booking.builder()
                 .pickup(bookingRequestDTO.getPickup())
@@ -20,7 +20,7 @@ public class BookingTransformer {
                 .build();
     }
 
-    public static BookingResponseDTO bookingToBookingResponse(Booking booking, Customer customer, Cab cab, Driver driver)
+    public static BookingResponseDTO EntityToDTO(Booking booking, Customer customer, Cab cab, Driver driver)
     {
         return BookingResponseDTO.builder()
                 .pickup(booking.getPickup())
@@ -30,8 +30,8 @@ public class BookingTransformer {
                 .billAmount(booking.getBillAmount())
                 .bookedAt(booking.getBookedAt())
                 .lastUpdateAt(booking.getLastUpdateAt())
-                .customer(CustomerTransformer.customerToCustomerResponse(customer))
-                .cab(CabTransformer.cabToCabResponse(cab, driver))
+                .customer(CustomerTransformer.EntityToDTO(customer))
+                .cab(CabTransformer.EntityToDTO(cab, driver))
                 .build();
     }
 }

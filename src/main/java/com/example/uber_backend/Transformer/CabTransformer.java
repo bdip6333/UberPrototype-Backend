@@ -7,7 +7,7 @@ import com.example.uber_backend.Entity.Driver;
 
 public class CabTransformer {
 
-        public static Cab cabRequestToCab(CabRequestDTO cabResponseDTO)
+        public static Cab DTOtoEntity(CabRequestDTO cabResponseDTO)
         {
             return Cab.builder()
                     .cabNumber(cabResponseDTO.getCabNumber())
@@ -15,14 +15,14 @@ public class CabTransformer {
                     .ratePerKm(cabResponseDTO.getRatePerKm())
                     .build();
         }
-        public static CabResponseDTO cabToCabResponse(Cab cab, Driver driver)
+        public static CabResponseDTO EntityToDTO(Cab cab, Driver driver)
         {
             return CabResponseDTO.builder()
                     .cabNumber(cab.getCabNumber())
                     .cabModel(cab.getCabModel())
                     .ratePerKm(cab.getRatePerKm())
                     .available(true)
-                    .driver(DriverTransformer.driverToDriverResponse(driver))
+                    .driver(DriverTransformer.EntityToDTO(driver))
                     .build();
         }
 }

@@ -15,18 +15,30 @@ public class DriverController {
 
     //Create
     @PostMapping("/create")
-    public DriverResponseDTO addDriver(@RequestBody DriverRequestDTO driverRequestDTO)
+    public DriverResponseDTO createDriver(@RequestBody DriverRequestDTO driverRequestDTO)
     {
-        return driverServices.addDriver(driverRequestDTO);
+        return driverServices.createDriver(driverRequestDTO);
+    }
+
+    //Read
+    @GetMapping("/read/{id}")
+    public DriverResponseDTO readDriver(@PathVariable("id") int driverId)
+    {
+        return driverServices.readDriver(driverId);
     }
 
     //Update
-
-    //Read
-    @GetMapping("/read")
-    public DriverResponseDTO getDriver(@PathVariable("id") int driverId)
+    @PutMapping("/update/{id}")
+    public DriverResponseDTO updateDriver(@PathVariable("id") int driverId,@RequestBody DriverRequestDTO driverRequestDTO)
     {
-        return driverServices.getDriver(driverId);
+        return driverServices.updateDriver(driverId,driverRequestDTO);
+    }
+
+    //Delete
+    @DeleteMapping("/delete/{id}")
+    public DriverResponseDTO deleteDriver(@PathVariable("id") int driverId)
+    {
+        return driverServices.deleteDriver(driverId);
     }
 
 }

@@ -29,12 +29,11 @@ public class CabServices {
 
         Driver driver=optionalDriver.get();
 
-
-        Cab cab= CabTransformer.cabRequestToCab(cabRequestDTO);
+        Cab cab= CabTransformer.DTOtoEntity(cabRequestDTO);
         driver.setCab(cab);
         Driver saveDriver=driverRepository.save(driver);
 
 //        Cab savedCab=cabRepository.save(cab);
-        return CabTransformer.cabToCabResponse(saveDriver.getCab(),saveDriver);
+        return CabTransformer.EntityToDTO(saveDriver.getCab(),saveDriver);
     }
 }

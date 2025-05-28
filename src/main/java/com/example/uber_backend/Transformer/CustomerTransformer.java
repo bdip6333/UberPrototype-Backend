@@ -6,7 +6,7 @@ import com.example.uber_backend.Entity.Customer;
 
 public class CustomerTransformer
 {
-    public static Customer customerRequestToCustomer(CustomerRequestDTO customerRequestDTO)
+    public static Customer DTOtoEntity(CustomerRequestDTO customerRequestDTO)
     {
         return Customer.builder()
                   .name(customerRequestDTO.getName())
@@ -15,7 +15,7 @@ public class CustomerTransformer
                   .gender(customerRequestDTO.getGender())
                   .build();
     }
-    public static CustomerResponseDTO customerToCustomerResponse(Customer customer)
+    public static CustomerResponseDTO EntityToDTO(Customer customer)
     {
         return CustomerResponseDTO.builder()
                 .name(customer.getName())
